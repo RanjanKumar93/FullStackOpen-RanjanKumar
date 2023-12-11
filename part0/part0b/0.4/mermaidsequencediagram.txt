@@ -1,0 +1,41 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->>browser:  HTTP status code 302
+    deactivate server
+
+
+    Note right of browser:This is a URL redirect through which server asks the browser to do a new HTTP GET request to the address defined in the header's Location-the address notes. So, the browser reloads the Notes page. The reload causes four more HTTP requests.
+    Note right of browser:Before replying to these request, the server access the data by accessing the req.body field of the request object req. The server creates a new note object, and adds it to an array called notes.
+
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML Document
+    deactivate server
+
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+
+    Note right of browser:In Network tab, in new_note there is a payload tab where we can see the input data in thr Form-Data option. The Form tag has attributes action and method, which define that submitting the form is done as an HTTP POST request to the address new_note.
+    Note right of browser:Now the new input is added.
