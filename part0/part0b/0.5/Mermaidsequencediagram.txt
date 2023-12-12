@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser:  one page HTML + Javascript code
+    deactivate server
+
+    Note right of browser:Javascript code fetches the notes from the server as JSON data and adds HTML elements for displaying the notes to the page using the DOM-API.
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser:At first glance, the application looks exactly the same as the previous one. The HTML code is almost identical, but the JavaScript file is different (spa.js).
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+    Note right of browser:Javascript from the browser help to get this JSON file which gets all th note item to display.
+    Note right of browser:SPA-style websites don't fetch all of their pages separately from the server, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.
+    Note right of browser:There is a small change in how the form-tag is defined, The form has no action or method attributes to define how and where to send the input data. Now, let's send a note and see what happening in 0.6.
