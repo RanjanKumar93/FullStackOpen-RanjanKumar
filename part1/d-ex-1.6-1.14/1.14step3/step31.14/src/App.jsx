@@ -23,13 +23,14 @@ const App = () => {
     setVotes(copy)
   }
 
-  console.log(votes)
-
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p style={{ marginBottom: '1px' }}>{anecdotes[selected]} {votes[selected]} votes</p>
       <button style={{ backgroundColor: "#f5f7f6", border: '1px solid grey', borderRadius: '6px', margin: '1px' }} onClick={onVoteClick}>vote</button>
       <button style={{ backgroundColor: "#f5f7f6", border: '1px solid grey', borderRadius: '6px' }} onClick={() => setSelected(Math.floor(Math.random() * (anecdotes.length)))}>next anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[copy.indexOf(Math.max(...copy))]}</p>
     </div>
   )
 }
