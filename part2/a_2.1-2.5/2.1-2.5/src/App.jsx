@@ -1,3 +1,5 @@
+import Components from './components'
+
 const App = () => {
   const course = [
     {
@@ -44,25 +46,7 @@ const App = () => {
     }
   ]
 
-  return (
-    <div>
-      {course.map((x) => {
-        return (
-          <div key={x.id}>
-            <h1>{x.name}</h1>
-            {x.parts.map((y) => {
-              return (
-                <div key={y.id}>
-                  <p>{y.name} {y.exercises}</p>
-                </div>
-              )
-            })}
-            <h3>total of {x.parts.reduce((sum, a) => sum + a.exercises, 0)} exercises</h3>
-          </div >
-        )
-      })}
-    </div>
-  )
+  return <Components course={course} />
 }
 
 export default App
